@@ -22,17 +22,21 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
+// Auth routes
+
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
 router.post("/login", authController.login);
 
 //1. Validate the registration
 //2. register the user
 //3. we need to log them in
-router.post(
-  "/register",
-  userValidationRules(),
-  validate,
-  userController.register,
-  authController.login
-);
+router.post("/register", userValidationRules(), validate, userController.register, authController.login);
 
 export default router;
