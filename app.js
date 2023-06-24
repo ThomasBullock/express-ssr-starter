@@ -47,31 +47,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(expressValidator());
 
 // Connect to our Database and handle an bad connections
-mongoose.connect(
-  `mongodb+srv://${process.env.DB_USER}:${encodeURIComponent(
-    process.env.DB_PASSWORD
-  )}${process.env.DB_URL}`
-);
+// mongoose.connect(
+//   `mongodb+srv://${process.env.DB_USER}:${encodeURIComponent(
+//     process.env.DB_PASSWORD
+//   )}${process.env.DB_URL}`
+// );
 
 // Sessions allow us to store data on visitors from request to request
 // This keeps users logged in and allows us to send flash messages
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
-    // mongooseConnection has been removed. Please update your application code to use either mongoUrl, client or clientPromise
-    store: MongoStore.create({
-      client: mongoose.connection.getClient(),
-      dbName: process.env.DB_NAME,
-      collectionName: "sessions",
-      stringify: false,
-      autoRemove: "interval",
-      autoRemoveInterval: 1,
-    }),
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
+//     // mongooseConnection has been removed. Please update your application code to use either mongoUrl, client or clientPromise
+//     store: MongoStore.create({
+//       client: mongoose.connection.getClient(),
+//       dbName: process.env.DB_NAME,
+//       collectionName: "sessions",
+//       stringify: false,
+//       autoRemove: "interval",
+//       autoRemoveInterval: 1,
+//     }),
+//   })
+// );
 
 // After allllll that above middleware, we finally handle our own routes!
 app.use("/", routes);
